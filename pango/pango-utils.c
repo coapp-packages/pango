@@ -698,9 +698,13 @@ pango_get_sysconf_subdirectory (void)
   if (result == NULL)
     {
 #ifdef G_OS_WIN32
+#if 1 /* We can't have directories in assemblies, so we're flattening the directory structure. */
+	result = g_win32_get_package_installation_directory_of_module (pango_dll);
+#else
       gchar *root = g_win32_get_package_installation_directory_of_module (pango_dll);
       result = g_build_filename (root, "etc\\pango", NULL);
       g_free (root);
+#endif
 #else
       const char *sysconfdir = g_getenv ("PANGO_SYSCONFDIR");
       if (sysconfdir != NULL)
