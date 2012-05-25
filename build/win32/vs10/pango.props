@@ -6,7 +6,7 @@
     <PangoDummyPrefix>/dummy</PangoDummyPrefix>
     <PangoDefines>G_LOG_DOMAIN="Pango";PANGO_ENABLE_BACKEND;PANGO_ENABLE_ENGINE;SYSCONFDIR="$(PangoDummyPrefix)/etc";LIBDIR="$(PangoDummyPrefix)/lib"</PangoDefines>
     <NoFCDef>PANGO_VISUALC_NO_FC</NoFCDef>
-	<GlibEtcInstallRoot>..\..\..\..\vs10\$(Platform)</GlibEtcInstallRoot>
+	<GlibEtcInstallRoot>..\..\..\vs10\$(Platform)</GlibEtcInstallRoot>
 	<CopyDir>$(GlibEtcInstallRoot)</CopyDir>
     <PangoDoInstall>
 echo on
@@ -121,13 +121,13 @@ copy ..\..\..\pango\pangoft2.h $(CopyDir)\include\pango-$(PangoApiVersion)\pango
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..;..\..\..\pango;$(GlibEtcInstallRoot)\lib\glib-2.0\include;$(GlibEtcInstallRoot)\include\glib-2.0;$(GlibEtcInstallRoot)\include;$(GlibEtcInstallRoot)\include\cairo;$(GlibEtcInstallRoot)\include\fontconfig;$(GlibEtcInstallRoot)\include\freetype2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..;..\..\..\pango;$(ProgramData)\include\glib;$(ProgramData)\include\glib\glib-2.0;$(ProgramData)\include\cairo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>HAVE_CONFIG_H;G_DISABLE_SINGLE_INCLUDES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ForcedIncludeFiles>msvc_recommended_pragmas.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>gio-2.0.lib;gmodule-2.0.lib;gobject-2.0.lib;glib-2.0.lib;intl.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(GlibEtcInstallRoot)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>gio-2.0.lib;gmodule-2.0.lib;gobject-2.0.lib;glib-2.0.lib;libintl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProgramData)\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
       <Command>
