@@ -63,11 +63,12 @@ package {
 	build-command: @"
         cd COPKG
         autopackage pango-dev-common.autopkg || goto failed
-        autopackage pango.autopkg || goto failed
+        autopackage pango.autopkg pango-dev.autopkg || goto failed
 	";
 
 	targets: {
 		@"COPKG\pango[vc10]-${package-version}-x86.msi",
+		@"COPKG\pango-dev[vc10]-${package-version}-x86.msi",
 		@"COPKG\pango-dev-common-${package-version}-any.msi",
 	};
 
