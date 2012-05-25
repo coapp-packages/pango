@@ -1,0 +1,118 @@
+@import "version.inc";
+@import "compat.inc" ;
+@import "outercurve.inc";
+
+#define { 
+    flavor: "${comp??vc10}"; 
+    arch : "${plat??x86}";
+}
+
+package {
+    name: "pango[${flavor}]";
+    version: "${package-version}";
+    arch : "${arch}";
+
+    display-name: "Pango";
+    location: "http://coapp.org/repository/${OutputFilename}";
+
+    feed: "http://coapp.org/repository/packages.atom.xml";
+    publisher: "CoApp Project";
+}
+
+license[LGPL2] {
+	license: @"..\COPYING";
+    license-url: "http://www.gnu.org/licenses/old-licenses/lgpl-2.0.html";
+    license-type: "LGPL";
+}
+
+requires {
+    package: "glib[${flavor}]-${glib-dep-version}-${Package.Architecture}-${glib-dep-publickeytoken}";
+    package: "cairo[${flavor}]-${cairo-dep-version}-${Package.Architecture}-${cairo-dep-publickeytoken}";
+}
+
+metadata {  
+    summary: "Pango";
+    description: @"Pango is a library for laying out and rendering of text, with an emphasis on internationalization.";
+    author-version : "${author-version}";
+    bug-tracker: "https://github.com/coapp-packages/pango/issues";
+    stability : "0";
+    licenses : {
+        LGPL2
+    };
+}
+
+signing {
+    attributes : {
+        company="Outercurve Foundation",
+        description="Pango is a library for laying out and rendering of text, with an emphasis on internationalization.",
+        product-name="Pango",
+        product-version="${package-version}",
+        file-version="${package-version}",
+    };
+
+    replace-signature: true; 
+    include: { 
+        dlls,
+		pangocairodll
+    };    
+}
+
+manifest[glib] {
+    assembly : {
+        "glib[${flavor}]",
+    };
+
+    include : {
+        dlls
+    };
+}
+
+manifest[cairo] {
+    assembly : {
+        "glib[${flavor}]",
+        "cairo[${flavor}]",
+    };
+
+    include : {
+        pangocairodll
+    };
+}
+
+assembly[pango[${flavor}]] {
+    include : {
+        dlls,
+		pangocairodll,
+		conffiles
+    };
+}
+
+files[dlls] {
+    root: @"..\vs10\Win32\bin";
+
+    include: {
+        "pango-1-vs10.dll",
+        "pangowin32-1-vs10.dll",
+    };
+
+    trim-path: all;
+};
+
+files[pangocairodll] {
+    root: @"..\vs10\Win32\bin";
+
+    include: {
+        "pangocairo-1-vs10.dll",
+    };
+
+    trim-path: all;
+};
+
+files[conffiles] {
+    root: @"..\vs10\Win32\etc\pango";
+
+    include: {
+        "pango.aliases",
+    };
+
+    trim-path: all;
+};
