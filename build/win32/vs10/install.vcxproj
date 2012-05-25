@@ -180,10 +180,11 @@
       <Project>{68cc80b9-7225-4fb5-b9ab-9c1df50b6c76}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+	<!-- Disabled for now because configurations are borked.
     <ProjectReference Include="pangoft2.vcxproj">
       <Project>{68cc80b9-7225-4fb5-b9ab-9c1df50b6c73}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
+    </ProjectReference-->
     <ProjectReference Include="pangowin32.vcxproj">
       <Project>{68cc80b9-7225-4fb5-b9ab-9c1df50b6c74}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
