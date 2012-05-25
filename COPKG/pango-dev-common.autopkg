@@ -1,0 +1,48 @@
+@import "version.inc";
+@import "compat.inc" ;
+@import "outercurve.inc";
+
+package {
+    name: "pango-dev-common";
+    version: "${package-version}";
+    arch : "any";
+
+    display-name: "Pango Dev Common";
+    location: "http://coapp.org/repository/${OutputFilename}";
+
+    feed: "http://coapp.org/repository/packages.atom.xml";
+    publisher: "CoApp Project";
+}
+
+license[LGPL2] {
+	license: @"..\COPYING";
+    license-url: "http://www.gnu.org/licenses/old-licenses/lgpl-2.0.html";
+    license-type: "LGPL";
+}
+
+metadata {  
+    summary: "Pango Dev Common";
+    description: @"Pango is a library for laying out and rendering of text, with an emphasis on internationalization.";
+    author-version : "${author-version}";
+    bug-tracker: "https://github.com/coapp-packages/pango/issues";
+    stability : "0";
+    licenses : {
+        LGPL2
+    };
+}
+
+developer-library[pango] {
+    headers: {
+        headers
+    };
+}
+
+files[headers] {
+    root: @"..\vs10\Win32\include\pango-1.0";
+
+    include: {
+        "pango\*.h",
+    };
+
+    trim-path: none;
+};
