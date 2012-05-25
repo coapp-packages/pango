@@ -1,0 +1,58 @@
+@import "version.inc";
+
+#product-info  {
+    product-name: "pango";
+    version: "${package-version}";
+    original-source-location: "http://ftp.gnome.org/pub/GNOME/sources/pango/1.30/pango-1.30.0.tar.xz";
+    original-source-website: "http://ftp.acc.umu.se/pub/GNOME/sources/pango";
+    license: "LGPL 2";
+    packager: "Vincent Povirk <madewokherd@gmail.com>";
+}
+
+x86 {
+	requires: {
+		"glib-dev[vc10]-${glib-dep-version}-x86-${glib-dep-publickeytoken}",
+		"cairo-dev[vc10]-${cairo-dep-version}-x86-${cairo-dep-publickeytoken}",
+	};
+
+	platform: x86;
+	compiler: vc10;
+
+	build-command: @"
+		if ""${BUILT}"" equ ""true"" goto end
+		msbuild /p:Platform=Win32 /p:Configuration=Release build\win32\vs10\pango.sln
+:end
+	";
+
+	targets: {
+		@"vs10\Win32\bin\pango-1-vs10.dll",
+		@"vs10\Win32\bin\pangocairo-1-vs10.dll",
+		@"vs10\Win32\bin\pangowin32-1-vs10.dll",
+		@"vs10\Win32\etc\pango\pango.aliases",
+		@"vs10\Win32\lib\pango-1.0.lib",
+		@"vs10\Win32\lib\pangocairo-1.0.lib",
+		@"vs10\Win32\lib\pangowin32-1.0.lib",
+	};
+
+	clean-command: @"
+		rd /s /q vs10\win32
+		rd /q vs10
+		rd /s /q build\win32\vs10\Release
+		del pango\DONE_MODULE_DEFS_FC_C
+		del pango\DONE_MODULE_DEFS_H
+		del pango\DONE_MODULE_DEFS_LANG_C
+		del pango\DONE_MODULE_DEFS_WIN32_C
+		del pango\module-defs-fc.c
+		del pango\module-defs.h
+		del pango\module-defs-lang.c
+		del pango\module-defs-win32.c
+		del config.h
+	";
+}
+
+release {
+	uses: x86;
+}
+
+test {
+}
