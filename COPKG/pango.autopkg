@@ -33,7 +33,7 @@ requires {
 metadata {  
     summary: "Pango";
     description: @"Pango is a library for laying out and rendering of text, with an emphasis on internationalization.";
-    author-version : "${author-version}";
+    author-version : "${package-version}";
     bug-tracker: "https://github.com/coapp-packages/pango/issues";
     stability : "0";
     licenses : {
